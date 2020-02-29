@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+    </header>    
+    <div id="main">
+    </div>
+        <script type="text/babel">
+            class Header extends React.Component{
+                render(){
+                    return (
+                        <div className="app-content">
+                            <h1>Here's my React App</h1>
+                        </div>
+                    )
+                }
+            }
+            
+            class Main extends React.Component{
+                state={
+                    name: 'Jason',
+                    age: 39
+                }
+                handleClick = (e) => {
+                    this.setState({
+                        name: 'Jack'
+                    })
+                    console.log(this.state.name);
+                }
+                handleCopy(e){
+                    console.log('Quit stealing!');
+                }
+                handleMouseOver(e){
+                    console.log(e);
+                }
+                render(){    
+                    return(
+                        <>
+                            <h3>Hello there, { this.state.name }</h3>
+                            <button onClick={ this.handleClick }>Click Me!</button>
+                            <button onMouseOver={ this.handleMouseOver }>Hover me!</button>
+                            <p>Here's a number for your enjoyment: { Math.random() * 100 | 0 }</p>
+                            <p onCopy={ this.handleCopy }>Don't copy this copyrighted content!</p>
+                        </>
+                    )
+                }
+            }
+            
+            
+            ReactDOM.render(<Header />, document.querySelector('header'));
+            ReactDOM.render(<Main />, document.querySelector('#main'));
+        </script>
+</body>
+</html>
