@@ -11,14 +11,14 @@
 <body>
     <header>
     </header>    
-    <div id="main">
-    </div>
+    <div id="main"></div>
+    <div id="form"></div>
         <script type="text/babel">
             class Header extends React.Component{
                 render(){
                     return (
                         <div className="app-content">
-                            <h1>Here's my React App</h1>
+                            <h1>Here's my Very Third React App</h1>
                         </div>
                     )
                 }
@@ -29,16 +29,16 @@
                     name: 'Jason',
                     age: 39
                 }
-                handleClick = (e) => {
+                handleClick = e => {            // Arrow functions allow this to be bound to component
                     this.setState({
                         name: 'Jack'
-                    })
+                    });
                     console.log(this.state.name);
                 }
-                handleCopy(e){
+                handleCopy = e => {
                     console.log('Quit stealing!');
                 }
-                handleMouseOver(e){
+                handleMouseOver = e => {
                     console.log(e);
                 }
                 render(){    
@@ -54,9 +54,36 @@
                 }
             }
             
+            class WebForm extends React.Component{
+                state = {
+                    noun: 'duck'
+                }
+                handleChange = e => {
+                    console.log(this.state.noun);
+                    this.setState({
+                        noun: e.target.value
+                    });
+                }
+                handleSubmit = e => {
+                    e.preventDefault();
+                    console.log('Form submitted with', this.state.noun);
+                }
+                render(){
+                    return(
+                        <>
+                            <p>This isn't a form, this is a { this.state.noun }. </p>
+                            <form onSubmit={ this.handleSubmit }>
+                                <input type="text" onChange={ this.handleChange } />
+                                <button>Submit</button>
+                            </form>
+                        </>
+                    )
+                }
+            }
             
             ReactDOM.render(<Header />, document.querySelector('header'));
             ReactDOM.render(<Main />, document.querySelector('#main'));
+            ReactDOM.render(<WebForm />, document.querySelector('#form'));
         </script>
 </body>
 </html>
